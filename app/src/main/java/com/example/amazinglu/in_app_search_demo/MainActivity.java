@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 这个方法里面的startSearch会让search 的 dialog出现而且将query传送到searchable activity中
+     * */
     @Override
     public boolean onSearchRequested() {
         fakeData();
