@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <provider
+            android:authorities="com.example.amazinglu.in_app_search_demo.search_suggestion.RecentSuggestionProvider"
+            android:name=".search_suggestion.RecentSuggestionProvider"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        android.support.v7.widget.SearchView searchView =
+        final android.support.v7.widget.SearchView searchView =
                 (android.support.v7.widget.SearchView) menu.findItem(R.id.action_search).getActionView();
 
         // Assumes current activity is the searchable activity
@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
         searchView.setAppSearchData(appData);
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
+        // show the summit button
+        searchView.setSubmitButtonEnabled(true);
+        // 可以把suggest 加入到 query中
+        searchView.setQueryRefinementEnabled(true);
 
         return true;
     }

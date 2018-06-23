@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.example.amazinglu.in_app_search_demo.search_suggestion.RecentSuggestionProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +80,7 @@ public class SearchableActivity extends AppCompatActivity {
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);
+        searchView.setQueryRefinementEnabled(true);
 
         return true;
     }
@@ -91,6 +95,10 @@ public class SearchableActivity extends AppCompatActivity {
             if (bundle != null) {
                 unfilterData = bundle.getStringArrayList(KEY_DATA);
             }
+
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                    RecentSuggestionProvider.AUTHRITY, RecentSuggestionProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
 
             doSearch(query);
         }
