@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * search dialog 中，如果要pass extra data到 searchable activity 中，将bundle加到startSearch中
      * 这个方法里面的startSearch会让search 的 dialog出现而且将query传送到searchable activity中
      * */
     @Override

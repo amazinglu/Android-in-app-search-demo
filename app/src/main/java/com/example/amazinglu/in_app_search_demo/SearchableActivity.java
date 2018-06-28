@@ -22,6 +22,12 @@ public class SearchableActivity extends AppCompatActivity {
     private List<String> unfilterData;
     private SearchResultAdapter adapter;
 
+    /**
+     * the searchable activity which has the intent-filter of android.intent.action.SEARCH will be call
+     * after finish entering in search widget or search dialog and start search
+     *
+     * the other activity knows where the searchable activity is by adding meta-data in Manifest
+     * */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +75,10 @@ public class SearchableActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * define how to search here
+     * notice: if the data is linked with recycler view's adapter, data update should not be down in UI thread
+     * */
     private void doSearch(final String query) {
         new Thread(new Runnable() {
             @Override
