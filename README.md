@@ -7,3 +7,7 @@ use seaerch widget
   
 branch: search_dialog
 use search dialog
+
+branch: custom_suggestion
+  - use search widget
+  - add custom query suggestion
