@@ -9,6 +9,7 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 /**
  * to implements App specific suggestion -> use custom Content provider
@@ -39,6 +40,11 @@ import android.support.annotation.Nullable;
  * 3. searchable activity do sth when user click the suggestion
  * we can use SUGGEST_COLUMN_INTENT_DATA, SUGGEST_COLUMN_INTENT_DATA_ID and SUGGEST_COLUMN_INTENT_EXTRA_DATA
  * to return send data from content provider to searchable activity
+ *
+ * reference:
+ * https://developer.android.com/guide/topics/search/adding-custom-suggestions#HandlingSuggestionQuery
+ * https://www.grokkingandroid.com/android-tutorial-adding-suggestions-to-search/
+ * http://www.zoftino.com/android-search-dialog-with-search-suggestions-example
  * */
 
 // TODO: custom suggestion with SQLite database
@@ -67,12 +73,32 @@ public class MyCustomSuggestionProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        switch (uriMatcher.match(uri)) {
-            case 1:
-                String query = uri.getLastPathSegment().toLowerCase();
-                return getSearchResultsCursor(query);
-            default:
-                return null;
+        /**
+         * The system can send you the search query text in two ways. The default manner is
+         * for the query text to be included as the last path of the content
+         * URI passed in the uri parameter.
+         * However, if you include a selection value in your
+         * searchable configuration's android:searchSuggestSelection attribute,
+         * then the query text is instead passed as the first element of the selectionArgs string array.
+         * */
+
+//        // query text to be included as the last path of the content of URI
+//        switch (uriMatcher.match(uri)) {
+//            case 1:
+//
+//                String query = uri.getLastPathSegment().toLowerCase();
+//                return getSearchResultsCursor(query);
+//            default:
+//                return null;
+//        }
+
+        // query is the first element of the selectionArgs string array
+        // I personally prefer this way
+        if (selectionArgs != null && selectionArgs.length > 0 && selectionArgs[0].length() > 0) {
+            String query = selectionArgs[0];
+            return getSearchResultsCursor(query);
+        } else {
+            return null;
         }
     }
 

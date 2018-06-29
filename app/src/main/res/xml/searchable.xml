@@ -4,6 +4,7 @@
     android:hint="@string/search_hint"
     android:searchSuggestAuthority="com.example.amazinglu.in_app_search.MyCustomSuggestionProvider"
     android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSuggestSelection="word MATCH ?"
     android:searchSuggestPath="stores">
 
 </searchable>
