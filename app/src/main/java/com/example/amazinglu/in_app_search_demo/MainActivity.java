@@ -79,8 +79,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void fakeData() {
         data = new ArrayList<>();
-        for (int i = 0 ; i < 10; ++i) {
-            data.add("Search" + i);
-        }
+        data.add("Amazon");
+        data.add("Sears");
+        data.add("Ebay Home");
+        data.add("Macys Home");
+        data.add("JCpenney Kids");
+        data.add("Ebay Electronics");
+        data.add("Amazon Appliance");
+        data.add("Ebay Mobiles");
+        data.add("Ebay Kids");
+        data.add("Amazon Fashion");
+        data.add("Ebay Travel");
+        data.add("JCpenney Home");
+        data.add("JCpenney Luggage");
+        data.add("JCpenney Appliance");
+        data.add("JCpenney Fashion");
+        data.add("Amazon Luggage");
+        data.add("Macys Jewellery");
+        data.add("JCpenney Jewellery");
+        data.add("Amazon Jewellery");
     }
 }

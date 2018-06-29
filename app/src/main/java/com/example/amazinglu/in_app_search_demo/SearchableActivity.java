@@ -3,6 +3,7 @@ package com.example.amazinglu.in_app_search_demo;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -58,17 +59,22 @@ public class SearchableActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent) {
-        Toast.makeText(SearchableActivity.this, "handleIntent", Toast.LENGTH_SHORT).show();
+        // get user data
+        Bundle bundle = getIntent().getBundleExtra(SearchManager.APP_DATA);
+        if (bundle != null) {
+            unfilterData = bundle.getStringArrayList(KEY_DATA);
+        }
+
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-
-            // get user data
-            Bundle bundle = getIntent().getBundleExtra(SearchManager.APP_DATA);
-            if (bundle != null) {
-                unfilterData = bundle.getStringArrayList(KEY_DATA);
-            }
-
             doSearch(query);
+        } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+            String resultStr = intent.getDataString();
+            /**
+             * content in SUGGEST_COLUMN_INTENT_DATA and SUGGEST_COLUMN_INTENT_DATA_ID will be split by "/"
+             * */
+            String[] query = resultStr.split("/");
+            doSearch(query[0]);
         }
     }
 
